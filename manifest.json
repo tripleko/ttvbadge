@@ -1,0 +1,17 @@
+{
+    "name": "TTV Badge",
+    "description": "Displays custom badges in broadcaster enabled channels.",
+    "version": "0.3",
+    "permissions": [
+        "https://*.twitch.tv/", "http://*.twitch.tv/", "https://badge.tripleko.com/*"
+    ],
+    "content_scripts": [
+    {
+        "matches": ["https://www.twitch.tv/*", "http://www.twitch.tv/*"],
+        "js": ["jquery.js", "main.js"],
+        "css":["ttvbadge.css"],
+        "run_at": "document_idle"
+    }
+    ],
+    "manifest_version": 2
+}
