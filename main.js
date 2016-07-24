@@ -23,7 +23,6 @@ function addBadges(badgeCollect, badgeNum, badgeTitle, imgurID) {
 
 function updateAllChat() {
     for(let b = 0; b < chatList.length; b++) {
-        //console.log(chatList[b].children);
         let user;
         let badgeCollect;
         for(let i = 0; i < chatList[b].children.length; i++) {
@@ -33,7 +32,6 @@ function updateAllChat() {
             else if(chatList[b].children[i].className.indexOf("badges") !== -1) {
                 badgeCollect = chatList[b].children[i];
             }
-            //console.log(chatList[b].children[i].className);
         }
 
         //Start off checking global data
@@ -66,8 +64,6 @@ function updateGlobalData() {
     });
 }
 
-//TODO: Check to make sure it's actually working on multichannel browsing.
-
 /*Frequently the chat loads late so it's necessary to check that observer has been properly assigned.
 Also, there's a possibility that the user navigates away and opens up a new channel with a new chat, in which case the observer will cease to work.
 
@@ -86,16 +82,12 @@ let tempRoomTitle;
 
 function updateChanData() {
     tempRoomTitle = $(".room-title").first().text();
-    //alert("hi");
-    //alert(tempRoomTitle);
     if(tempRoomTitle != null && tempRoomTitle != "") {
-        //alert(JSON.stringify(chanData));
         if(tempRoomTitle !== roomTitle) {
             roomTitle = tempRoomTitle;
         }
 
         $.getJSON( "https://badge.tripleko.com/users/" + roomTitle, function(data) {
-            //alert(JSON.stringify(data));
             chanData = data;
         });
     }
@@ -103,8 +95,6 @@ function updateChanData() {
 
 function initObserver() {
     tempNode = document.getElementsByClassName("chat-lines")[0];
-
-    //alert(roomTitleNode);
 
     //If this condition is true, that means that the user has gone to a new page or channel.
     if(tempNode !== chatLinesNode) {
@@ -136,7 +126,7 @@ updateGlobalData();
 
 //TODO: Replace with more elegant solution?
 //I send out a check every second after document idle because the chat takes a while to load.
-//I reduce down down to every 5 seconds after the initial load to avoid mitigate the load on my site.
+//I reduce to every 5 seconds after the initial load to avoid mitigate the load on my site.
 setTimeout(function() {
     updateChanData();
     updateAllChat();
